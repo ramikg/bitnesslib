@@ -1,12 +1,10 @@
 # bitnesslib
 
-A Python library with one simple purpose – given a binary, determine its bitness.  
+A Python library with one simple purpose: given a binary, determine its bitness.  
 
 ## Installation
 
 `pip install bitnesslib`
-
-Python 3 is required.
 
 ## Usage example
 

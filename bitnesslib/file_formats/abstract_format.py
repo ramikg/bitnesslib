@@ -1,6 +1,9 @@
 import os
 import struct
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
+
+# Compatible with Python 2 & 3
+ABC = ABCMeta('ABC', (object,), {'__slots__': ()})
 
 
 class BitnessLibFormatError(Exception):

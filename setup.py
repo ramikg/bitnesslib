@@ -1,16 +1,18 @@
 from setuptools import setup, find_packages
-from pathlib import Path
+import os
 
-readme_path = Path(__file__).parent / 'README.md'
+readme_path = os.path.join(os.path.dirname(__file__), 'README.md')
+with open(readme_path) as readme:
+    long_description = readme.read()
 
 setup(name='bitnesslib',
       description='Given a binary, determine its bitness',
-      long_description=readme_path.read_text(encoding='utf-8'),
-      long_description_content_type="text/markdown",
+      long_description=long_description,
+      long_description_content_type='text/markdown',
       url='https://github.com/ramikg/bitnesslib',
-      version='0.1',
+      version='0.1.0',
       packages=find_packages(),
-      python_requires='>=3',
       classifiers=[
-        "Programming Language :: Python :: 3 :: Only"
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3'
       ])
