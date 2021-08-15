@@ -1,31 +1,31 @@
-import importlib
-import os
-
-from bitnesslib.file_formats.abstract_format import BitnessLibFormatError
+from .file_formats.magic_map import magic_map
 
 FORMATS_FOLDER_NAME = 'file_formats'
 ABSTRACT_FORMAT_MODULE_NAME = 'abstract_format.py'
+NUMBER_OF_MAGIC_BYTES_TO_READ = 4
 
 
 class BitnessLibUnknownFormatError(Exception):
     pass
 
 
+def _get_dict_value_based_on_longer_key(d, longer_key):
+    keys_with_prefix = [key for key in d.keys() if longer_key.startswith(key)]
+    # Assumption: No key is a prefix of another key
+    assert len(keys_with_prefix) <= 1
+
+    if not keys_with_prefix:
+        raise BitnessLibUnknownFormatError()
+
+    key_with_prefix = keys_with_prefix[0]
+    return d[key_with_prefix]
+
+
 def get_bitness(path):
-    formats_folder_path = os.path.join(os.path.dirname(__file__), FORMATS_FOLDER_NAME)
-    for module_name in os.listdir(formats_folder_path):
-        if (module_name in ('__init__.py', ABSTRACT_FORMAT_MODULE_NAME)
-                or not module_name.endswith('.py')):
-            continue
+    with open(path, 'rb') as file:
+        magic_bytes = file.read(NUMBER_OF_MAGIC_BYTES_TO_READ)
 
-        module_name_without_ext = os.path.splitext(module_name)[0]
-        file_format_module = importlib.import_module(
-            'bitnesslib.{}.{}'.format(FORMATS_FOLDER_NAME, module_name_without_ext))
-        file_format_parser = file_format_module.FileFormatParser(path)
+    file_format_parser_class = _get_dict_value_based_on_longer_key(magic_map, magic_bytes)
+    file_format_parser = file_format_parser_class(path)
 
-        try:
-            return file_format_parser.get_bitness()
-        except BitnessLibFormatError:
-            continue
-
-    raise BitnessLibUnknownFormatError()
+    return file_format_parser.get_bitness()

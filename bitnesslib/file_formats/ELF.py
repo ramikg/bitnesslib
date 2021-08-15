@@ -10,9 +10,7 @@ class ElfFormat(abstract_format.AbstractFormat):
     def get_bitness(self):
         with open(self._path, 'rb') as file:
             magic = file.read(ELF_SIZE_OF_MAGIC)
-
-            if magic != ELF_MAGIC:
-                raise abstract_format.BitnessLibFormatError()
+            assert magic == ELF_MAGIC
 
             elf_class = self.file_read_uint8(file)
 
@@ -22,6 +20,3 @@ class ElfFormat(abstract_format.AbstractFormat):
             return 64
 
         raise abstract_format.BitnessLibFormatError()
-
-
-FileFormatParser = ElfFormat

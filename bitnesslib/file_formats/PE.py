@@ -2,7 +2,6 @@ from bitnesslib.file_formats import abstract_format
 
 PE_SIZE_OF_MZ_MAGIC = 2
 PE_MZ_MAGIC = b'MZ'
-PE_MZ_MAGIC_REVERSED = b'ZM'
 PE_OFFSET_OF_PE_HEADER = 0x3C
 PE_SIZE_OF_PE_HEADER_MAGIC = 4
 PE_HEADER_MAGIC = b'PE\0\0'
@@ -15,12 +14,7 @@ class PeFormat(abstract_format.AbstractFormat):
     def get_bitness(self):
         with open(self._path, 'rb') as file:
             magic = file.read(PE_SIZE_OF_MZ_MAGIC)
-
-            if magic == PE_MZ_MAGIC_REVERSED:
-                return 16
-
-            if magic != PE_MZ_MAGIC:
-                raise abstract_format.BitnessLibFormatError()
+            assert magic == PE_MZ_MAGIC
 
             try:
                 file.seek(PE_OFFSET_OF_PE_HEADER)

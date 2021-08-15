@@ -1,1 +1,1 @@
-from bitnesslib.bitnesslib import get_bitness, BitnessLibUnknownFormatError
+from .bitnesslib import get_bitness, BitnessLibUnknownFormatError
