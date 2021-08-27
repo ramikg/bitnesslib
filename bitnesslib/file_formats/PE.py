@@ -38,6 +38,3 @@ class PeFormat(abstract_format.AbstractFormat):
                 pass
 
             raise abstract_format.BitnessLibFormatError()
-
-
-FileFormatParser = PeFormat
