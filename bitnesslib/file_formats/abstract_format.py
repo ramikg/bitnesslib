@@ -38,3 +38,8 @@ class AbstractFormat(ABC):
     def file_read_little_endian_uint32(file):
         bytes = file.read(4)
         return struct.unpack('<L', bytes)[0]
+
+    @staticmethod
+    def file_read_big_endian_uint16(file):
+        bytes = file.read(2)
+        return struct.unpack('>H', bytes)[0]
