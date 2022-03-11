@@ -1,5 +1,5 @@
 """
-Maps a magic to its corresponding get_bitness method
+Maps a magic to its corresponding format class
 """
 
 from bitnesslib.file_formats import ELF, PE
