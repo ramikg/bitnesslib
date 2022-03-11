@@ -2,7 +2,9 @@
 Maps a magic to its corresponding format class
 """
 
-from bitnesslib.file_formats import ELF, PE
+from bitnesslib.file_formats import (
+    ELF, PE, Minidump
+)
 from bitnesslib.file_formats.const_bitness_format import (
     Const16BitFormat, Const32BitFormat, Const64BitFormat
 )
@@ -25,5 +27,6 @@ magic_map = {
     MACHO_MH_MAGIC: Const32BitFormat,
     MACHO_MH_CIGAM: Const32BitFormat,
     MACHO_MH_MAGIC_64: Const64BitFormat,
-    MACHO_MH_CIGAM_64: Const64BitFormat
+    MACHO_MH_CIGAM_64: Const64BitFormat,
+    Minidump.MINIDUMP_MAGIC: Minidump.MinidumpFormat
 }

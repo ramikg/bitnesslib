@@ -22,3 +22,4 @@ A Python library with one simple purpose: given a binary, determine its bitness.
 - ELF
 - Mach-O
 - IDA databases (_.idb_ & _.i64_)
+- Minidump
