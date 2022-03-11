@@ -10,7 +10,7 @@ setup(name='bitnesslib',
       long_description=long_description,
       long_description_content_type='text/markdown',
       url='https://github.com/ramikg/bitnesslib',
-      version='0.1.2',
+      version='0.2.0',
       packages=find_packages(),
       classifiers=[
         'Programming Language :: Python :: 2',
