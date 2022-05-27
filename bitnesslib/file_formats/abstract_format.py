@@ -16,7 +16,7 @@ class BitnessLibFileDoesNotExistError(Exception):
 
 class AbstractFormat(ABC):
     def __init__(self, path):
-        if not os.path.exists(path):
+        if not os.path.isfile(path):
             raise BitnessLibFileDoesNotExistError('File {} doesn\'t exist'.format(path))
 
         self._path = path
