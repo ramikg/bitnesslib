@@ -12,6 +12,9 @@ setup(name='bitnesslib',
       url='https://github.com/ramikg/bitnesslib',
       version='0.2.0',
       packages=find_packages(),
+      extras_require={
+        'test': ['pytest']
+      },
       classifiers=[
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3'
